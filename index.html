@@ -2534,19 +2534,19 @@ function renderCashflowTable(d) {
     extraHeaders = [`<th class="num">CER Used</th>`, `<th class="num">CER Ref. Date</th>`, `<th class="num">Amort</th>`, `<th class="num">Coupon</th>`];
     rowsHtml = cfs.map(cf => `<tr>
       <td class="num">${fmtDate(cf.pay_date)}</td>
-      <td class="num">${fmtNum(cf.nominal)}</td>
-      <td class="num em">${fmtNum(cf.adjusted)}</td>
+      <td class="num">${fmtNum(cf.nominal, 6)}</td>
+      <td class="num em">${fmtNum(cf.adjusted, 6)}</td>
       <td class="num">${fmtNum(cf.variables.cer_used, 2)}</td>
       <td class="num">${fmtDate(cf.variables.cer_ref_date)}</td>
-      <td class="num">${fmtNum(cf.amort_flow)}</td>
-      <td class="num">${fmtNum(cf.coupon_flow)}</td>
+      <td class="num">${fmtNum(cf.amort_flow, 6)}</td>
+      <td class="num">${fmtNum(cf.coupon_flow, 6)}</td>
     </tr>${cf.note ? `<tr><td colspan="7" class="var-note" style="padding:4px 0 10px">${cf.note}</td></tr>` : ""}`).join("");
   } else if (bt === "ARS_TAMAR" || bt === "DUO_TAMAR") {
     extraHeaders = [`<th class="num">TAMAR Avg Used</th>`, `<th class="num">Margen</th>`];
     rowsHtml = cfs.map(cf => `<tr>
       <td class="num">${fmtDate(cf.pay_date)}</td>
-      <td class="num">${fmtNum(cf.nominal)}</td>
-      <td class="num em">${fmtNum(cf.adjusted)}</td>
+      <td class="num">${fmtNum(cf.nominal, 6)}</td>
+      <td class="num em">${fmtNum(cf.adjusted, 6)}</td>
       <td class="num">${fmtNum(cf.variables.tamar_avg, 4)}%</td>
       <td class="num">${fmtPct(cf.variables.margen)}</td>
     </tr>`).join("");
@@ -2554,29 +2554,29 @@ function renderCashflowTable(d) {
     extraHeaders = [`<th class="num">TEM</th>`];
     rowsHtml = cfs.map(cf => `<tr>
       <td class="num">${fmtDate(cf.pay_date)}</td>
-      <td class="num">${fmtNum(cf.nominal)}</td>
-      <td class="num em">${fmtNum(cf.adjusted)}</td>
+      <td class="num">${fmtNum(cf.nominal, 6)}</td>
+      <td class="num em">${fmtNum(cf.adjusted, 6)}</td>
       <td class="num">${fmtPct(cf.variables.tem)}</td>
     </tr>`).join("");
   } else if (bt === "ARS_USD_LINKED") {
     extraHeaders = [`<th class="num">Currency</th>`, `<th class="num">Amort (USD)</th>`, `<th class="num">Coupon (USD)</th>`];
     rowsHtml = cfs.map(cf => `<tr>
       <td class="num">${fmtDate(cf.pay_date)}</td>
-      <td class="num">${fmtNum(cf.nominal)}</td>
-      <td class="num em">${fmtNum(cf.adjusted)}</td>
+      <td class="num">${fmtNum(cf.nominal, 6)}</td>
+      <td class="num em">${fmtNum(cf.adjusted, 6)}</td>
       <td class="num">${cf.currency}</td>
-      <td class="num">${fmtNum(cf.amort_flow)}</td>
-      <td class="num">${fmtNum(cf.coupon_flow)}</td>
+      <td class="num">${fmtNum(cf.amort_flow, 6)}</td>
+      <td class="num">${fmtNum(cf.coupon_flow, 6)}</td>
     </tr>`).join("");
   } else {
     extraHeaders = [`<th class="num">Coupon Rate</th>`, `<th class="num">Amort</th>`, `<th class="num">Coupon</th>`];
     rowsHtml = cfs.map(cf => `<tr>
       <td class="num">${fmtDate(cf.pay_date)}</td>
-      <td class="num">${fmtNum(cf.nominal)}</td>
-      <td class="num em">${fmtNum(cf.adjusted)}</td>
+      <td class="num">${fmtNum(cf.nominal, 6)}</td>
+      <td class="num em">${fmtNum(cf.adjusted, 6)}</td>
       <td class="num">${fmtPct(cf.variables.coupon_rate)}</td>
-      <td class="num">${fmtNum(cf.amort_flow)}</td>
-      <td class="num">${fmtNum(cf.coupon_flow)}</td>
+      <td class="num">${fmtNum(cf.amort_flow, 6)}</td>
+      <td class="num">${fmtNum(cf.coupon_flow, 6)}</td>
     </tr>`).join("");
   }
   return `<div class="panel">
