@@ -228,6 +228,8 @@
   .snap-cell .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin: 0 0 6px; }
   .snap-cell .value { font-size: 19px; font-weight: 800; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
   .snap-cell .value.accent { color: var(--accent); }
+  .snap-cell .sub { font-size: 12px; color: var(--muted); margin: 4px 0 0; font-variant-numeric: tabular-nums; }
+  .snap-cell .sub.change { font-weight: 700; }
   .panel {
     background: var(--paper); border: 1px solid var(--line); border-radius: 6px;
     box-shadow: var(--shadow); padding: 24px 28px; margin-bottom: 24px;
@@ -309,8 +311,20 @@
       <div class="snap-grid">
         <div class="snap-cell"><p class="label">Calc Date</p><p class="value">14-Aug-2026</p></div>
         <div class="snap-cell"><p class="label">Settlement</p><p class="value">18-Aug-2026</p></div>
-        <div class="snap-cell"><p class="label">Last FX</p><p class="value">1,488.70</p></div>
+        <div class="snap-cell">
+          <p class="label">Last FX</p><p class="value">1,488.70</p>
+          <p class="sub change" style="color:var(--negative)">-0.21% vs 1bd</p>
+        </div>
         <div class="snap-cell"><p class="label">TAMAR 5D Avg</p><p class="value">23.40%</p></div>
+        <div class="snap-cell">
+          <p class="label">Last TAMAR</p><p class="value">24.19%</p>
+          <p class="sub">13-Aug-2026</p>
+        </div>
+        <div class="snap-cell"><p class="label">Carry (1bd)</p><p class="value">0.256%</p></div>
+        <div class="snap-cell">
+          <p class="label">Last CER</p><p class="value">823.999</p>
+          <p class="sub">17-Aug-2026</p>
+        </div>
       </div>
     </header>
 
