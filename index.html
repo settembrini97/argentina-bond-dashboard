@@ -249,17 +249,17 @@
   .back-btn {
     display: inline-flex; align-items: center; gap: 6px;
     background: none; border: 1px solid var(--line); color: var(--ink-soft);
-    font-size: 13px; font-family: inherit; padding: 7px 14px; border-radius: 5px;
-    cursor: pointer; margin-bottom: 22px;
+    font-size: 11.5px; font-family: inherit; padding: 4px 10px; border-radius: 5px;
+    cursor: pointer; margin-bottom: 10px;
   }
   .back-btn:hover { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
-  .detail-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 4px; }
-  .detail-head h1 { margin: 0; font-size: 30px; }
+  .detail-head { display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap; margin-bottom: 2px; }
+  .detail-head h1 { margin: 0; font-size: 19px; }
   .type-chip {
-    font-size: 12px; font-weight: 600; letter-spacing: 0.02em;
-    padding: 4px 10px; border-radius: 100px; color: var(--paper);
+    font-size: 10px; font-weight: 600; letter-spacing: 0.02em;
+    padding: 2px 7px; border-radius: 100px; color: var(--paper);
   }
-  .detail-sub { color: var(--muted); font-size: 14px; margin: 6px 0 30px; }
+  .detail-sub { color: var(--muted); font-size: 11px; margin: 3px 0 10px; }
   .snap-grid {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(108px, 1fr));
     gap: 1px; background: var(--line); border: 1px solid var(--line);
@@ -273,16 +273,16 @@
   .snap-cell .sub.change { font-weight: 700; }
   .panel {
     background: var(--paper); border: 1px solid var(--line); border-radius: 6px;
-    box-shadow: var(--shadow); padding: 24px 28px; margin-bottom: 24px;
+    box-shadow: var(--shadow); padding: 10px 12px; margin-bottom: 10px;
   }
-  .panel h3 { font-size: 15px; font-weight: 800; letter-spacing: -0.01em; margin: 0 0 4px; }
-  .panel .sub { margin-bottom: 16px; }
-  .var-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; }
-  .var-item .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 0 0 4px; }
-  .var-item .value { font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .panel h3 { font-size: 13px; font-weight: 800; letter-spacing: -0.01em; margin: 0 0 2px; }
+  .panel .sub { margin-bottom: 8px; font-size: 11px; line-height: 1.45; }
+  .var-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(125px, 1fr)); gap: 9px; }
+  .var-item .label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 0 0 1px; }
+  .var-item .value { font-size: 13.5px; font-weight: 600; font-variant-numeric: tabular-nums; }
   .var-note {
-    font-size: 12.5px; color: var(--muted); margin-top: 14px; padding-top: 14px;
-    border-top: 1px dashed var(--line); line-height: 1.6;
+    font-size: 10.5px; color: var(--muted); margin-top: 8px; padding-top: 8px;
+    border-top: 1px dashed var(--line); line-height: 1.45;
   }
   .nav-tabs { display: flex; gap: 6px; margin-bottom: 22px; }
   .nav-tab {
@@ -367,10 +367,10 @@
     position: sticky; top: 0; background: var(--paper); z-index: 1;
     box-shadow: inset 0 -1px 0 var(--line);
   }
-  .cf-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin: 0 0 12px; }
+  .cf-tabs { display: flex; gap: 5px; flex-wrap: wrap; margin: 0 0 8px; }
   .cf-tab {
-    font: inherit; font-size: 12px; font-weight: 600; cursor: pointer;
-    padding: 5px 12px; border-radius: 100px; border: 1px solid var(--line);
+    font: inherit; font-size: 10.5px; font-weight: 600; cursor: pointer;
+    padding: 3px 9px; border-radius: 100px; border: 1px solid var(--line);
     background: var(--paper); color: var(--muted);
   }
   .cf-tab:hover { border-color: var(--accent); color: var(--ink); }
@@ -4440,7 +4440,8 @@ function renderDetail(ticker, cfWhich) {
     </div>
     <p class="detail-sub">Issued ${fmtDate(d.issue_date)} &middot; Matures ${fmtDate(d.maturity_date)}</p>
     <div class="snap-grid">
-      <div class="snap-cell"><p class="label">Calc / Settlement</p><p class="value" style="font-size:15px">${fmtDate(d.calc_date)} / ${fmtDate(d.settlement_date)}</p></div>
+      <div class="snap-cell"><p class="label">Calc Date</p><p class="value">${fmtDate(d.calc_date)}</p></div>
+      <div class="snap-cell"><p class="label">Settlement</p><p class="value">${fmtDate(d.settlement_date)}</p></div>
       <div class="snap-cell"><p class="label">Price</p><p class="value">${fmtPrice(d.dirty_price, d.bond_type)}</p></div>
       <div class="snap-cell"><p class="label">Clean Price</p><p class="value">${fmtNum(d.clean_price)}</p></div>
       <div class="snap-cell"><p class="label">Accrued</p><p class="value">${fmtNum(d.accrued)}</p></div>
