@@ -60,18 +60,28 @@
   }
   .page { max-width: 980px; margin: 0 auto; }
   .hidden { display: none !important; }
-  header.report-head { margin-bottom: 32px; }
+  /* 2026-09-01 density pass on the TAB HEADERS, user request ("the top part
+     of each dashboard tab should be much smaller, less text and info should be
+     in much tighter boxes"). The 2026-08-25 pass tightened the tables and left
+     the headers alone, so every tab still spent ~850px of vertical space --
+     most of a laptop viewport -- on an eyebrow, a 30px title, a four-line
+     paragraph, a callout and three oversized stat cards before any data.
+     Presentation only: no rendered number changes. */
+  header.report-head { margin-bottom: 14px; }
+  .head-line {
+    display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin: 0 0 6px;
+  }
   .eyebrow {
-    font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--accent); font-weight: 700; margin: 0 0 8px;
+    font-size: 9px; letter-spacing: 0.09em; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin: 0;
   }
   h1 {
-    font-size: 30px; font-weight: 800; letter-spacing: -0.02em; margin: 0;
+    font-size: 19px; font-weight: 800; letter-spacing: -0.02em; margin: 0;
     text-wrap: balance;
   }
   .title-row {
     display: flex; align-items: center; justify-content: space-between;
-    gap: 16px; flex-wrap: wrap; margin: 0 0 20px;
+    gap: 10px; flex-wrap: wrap; margin: 0 0 10px;
   }
   .reset-all-btn {
     display: inline-flex; align-items: center; gap: 6px; flex: none;
@@ -251,15 +261,15 @@
   }
   .detail-sub { color: var(--muted); font-size: 14px; margin: 6px 0 30px; }
   .snap-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(108px, 1fr));
     gap: 1px; background: var(--line); border: 1px solid var(--line);
-    border-radius: 6px; overflow: hidden; margin-bottom: 24px;
+    border-radius: 6px; overflow: hidden; margin-bottom: 12px;
   }
-  .snap-cell { background: var(--paper); padding: 16px 18px; }
-  .snap-cell .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin: 0 0 6px; }
-  .snap-cell .value { font-size: 19px; font-weight: 800; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
+  .snap-cell { background: var(--paper); padding: 7px 10px; }
+  .snap-cell .label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin: 0 0 2px; }
+  .snap-cell .value { font-size: 14.5px; font-weight: 800; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
   .snap-cell .value.accent { color: var(--accent); }
-  .snap-cell .sub { font-size: 12px; color: var(--muted); margin: 4px 0 0; font-variant-numeric: tabular-nums; }
+  .snap-cell .sub { font-size: 10px; color: var(--muted); margin: 2px 0 0; font-variant-numeric: tabular-nums; }
   .snap-cell .sub.change { font-weight: 700; }
   .panel {
     background: var(--paper); border: 1px solid var(--line); border-radius: 6px;
@@ -282,26 +292,26 @@
   }
   .nav-tab:hover { border-color: var(--accent); color: var(--accent); }
   .nav-tab.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-  .scen-intro { margin-bottom: 24px; }
-  .scen-intro p { color: var(--ink-soft); font-size: 14px; line-height: 1.65; max-width: 760px; }
+  .scen-intro { margin-bottom: 10px; }
+  .scen-intro p { color: var(--ink-soft); font-size: 11.5px; line-height: 1.5; max-width: 900px; margin: 0; }
   .scen-warn {
-    background: var(--accent-soft); border: 1px solid var(--accent); border-radius: 6px;
-    padding: 12px 16px; font-size: 12.5px; color: var(--ink-soft); line-height: 1.6; margin: 14px 0 0;
-    max-width: 760px;
+    background: var(--accent-soft); border: 1px solid var(--accent); border-radius: 5px;
+    padding: 5px 9px; font-size: 10.5px; color: var(--ink-soft); line-height: 1.45; margin: 7px 0 0;
+    max-width: 900px;
   }
   .dv-panel {
-    border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px;
-    margin: 18px 0 20px; background: var(--paper);
+    border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px;
+    margin: 10px 0 12px; background: var(--paper);
   }
-  .dv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
-  .dv-cell { border-left: 3px solid var(--line); padding-left: 10px; }
+  .dv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 9px; }
+  .dv-cell { border-left: 2px solid var(--line); padding-left: 8px; }
   .dv-cell.dv-stale { border-left-color: var(--negative); }
-  .dv-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin: 0 0 3px; font-weight: 600; }
-  .dv-value { font-size: 17px; font-weight: 700; margin: 0; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
-  .dv-sub { font-size: 11px; color: var(--muted); margin: 3px 0 0; line-height: 1.45; font-variant-numeric: tabular-nums; }
-  .dv-foot { font-size: 11.5px; color: var(--muted); margin: 12px 0 0; padding-top: 10px; border-top: 1px solid var(--line); line-height: 1.55; }
+  .dv-label { font-size: 8.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin: 0 0 1px; font-weight: 600; }
+  .dv-value { font-size: 14px; font-weight: 700; margin: 0; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+  .dv-sub { font-size: 9.5px; color: var(--muted); margin: 1px 0 0; line-height: 1.35; font-variant-numeric: tabular-nums; }
+  .dv-foot { font-size: 9.5px; color: var(--muted); margin: 7px 0 0; padding-top: 6px; border-top: 1px solid var(--line); line-height: 1.45; }
   .dv-warn {
-    margin-top: 10px; padding: 9px 12px; border-radius: 5px; font-size: 12px; line-height: 1.55;
+    margin-top: 7px; padding: 5px 8px; border-radius: 4px; font-size: 10px; line-height: 1.4;
     background: color-mix(in srgb, var(--negative) 10%, transparent);
     border: 1px solid color-mix(in srgb, var(--negative) 45%, transparent); color: var(--ink-soft);
   }
@@ -380,9 +390,8 @@
 
   <div id="view-dashboard">
     <header class="report-head">
-      <p class="eyebrow">Argentina Bond Analytics Platform</p>
       <div class="title-row">
-        <h1>Bond Summary</h1>
+        <div class="head-line"><h1>Bond Summary</h1><span class="eyebrow">Argentina Bond Analytics Platform</span></div>
         <div class="btn-group">
           <span id="update-status" class="update-status"></span>
           <div class="view-toggle" role="group" aria-label="Show tables, charts, or both">
@@ -1871,11 +1880,9 @@
 
   <div id="view-scenarios" class="hidden">
     <header class="report-head">
-      <p class="eyebrow">Argentina Bond Analytics Platform</p>
-      <h1>Scenario Analysis</h1>
+      <div class="head-line"><h1>Scenario Analysis</h1><span class="eyebrow">Argentina Bond Analytics Platform</span></div>
       <div class="scen-intro">
-        <p>Neutral assumes zero further inflation/devaluation. These scenarios project CER/TAMAR/FX forward instead, converting every bond's cash flows to nominal ARS so Neutral and each scenario are comparable across bond types.</p>
-        <div class="scen-warn">Read-only, as of 01-Sep-2026. Edit assumptions in <code>engine/scenarios.py</code>'s <code>SCENARIOS</code> and regenerate.</div>
+        <p>Cash flows projected into nominal ARS, so every bond type is comparable on one yield. Neutral assumes no further inflation or devaluation; scenarios are the BCRA <strong>REM</strong> survey (P10 / median / P90). Read-only as of 01-Sep-2026 &mdash; edit in <code>engine/scenarios.py</code>.</p>
       </div>
 <div class="dv-panel"><div class="dv-grid"><div class="dv-cell"><p class="dv-label">CER</p><p class="dv-value">832.3269</p><p class="dv-sub">01-Sep-2026 · 0bd behind</p></div><div class="dv-cell"><p class="dv-label">FX Oficial</p><p class="dv-value">1,512.7304</p><p class="dv-sub">01-Sep-2026 · 0bd behind</p></div><div class="dv-cell"><p class="dv-label">TAMAR</p><p class="dv-value">24.6875</p><p class="dv-sub">31-Aug-2026 · 1bd behind · expects 1bd lag</p></div><div class="dv-cell"><p class="dv-label">INDEC CPI (latest print)</p><p class="dv-value">2.100%</p><p class="dv-sub">Jul-26 · next (Aug-26) unlocks when CER reaches 16-Sep-2026</p></div></div><p class="dv-foot">Assumption window Jul-26 → Dec-27 (15 month(s) still ahead of today). Superseded by official data — CPI: Jul-26 · FX: none · TAMAR: Aug-26.</p><div class="dv-warn">⚠ TAMAR assumptions have drifted: on 2026-08-31 the real value is 24.69 but the assumed path (Aug-26 real -> Sep-26 assumed 22.72) implies 23.49 (+1.20pp) -- the projection must absorb that gap inside its first month. Re-run ingestion/rem_ingestion.py for a newer REM edition, or re-author SCENARIOS.</div></div>
       <div class="table-wrap assumptions-table-wrap">
@@ -2008,11 +2015,9 @@
 
   <div id="view-projections" class="hidden">
     <header class="report-head">
-      <p class="eyebrow">Argentina Bond Analytics Platform</p>
-      <h1>Projections</h1>
+      <div class="head-line"><h1>Projections</h1><span class="eyebrow">Argentina Bond Analytics Platform</span></div>
       <div class="scen-intro">
-        <p>The daily CER / FX / TAMAR series each scenario actually prices off. Each series is <strong>real published data first</strong> — every day the official series has, shown once because there is only one reality and the scenarios cannot differ over the past — and the projection then fills only what is genuinely missing, starting exactly where the published data ends (the last-real dates below). Beyond that: CER by daily chaining under the real Ley 25.713 mechanism, FX by log-linear interpolation between monthly closes, TAMAR by linear interpolation between monthly averages.</p>
-        <div class="scen-warn">Assumptions are as-of-today, independent of the dashboard's Calc Date: an official print always supersedes the assumption for its month. USD (NY Law) and USD (Argentine Law) bonds are excluded from scenario analysis.</div>
+        <p>The daily CER / FX / TAMAR series each scenario prices off. <strong>Real published data first</strong> (one line &mdash; scenarios cannot differ over the past); the projection fills only what is missing, starting where the published data ends. Beyond that: CER daily-chained under Ley 25.713, FX log-linear between monthly closes, TAMAR linear between monthly averages. Hard-dollar bonds are excluded.</p>
       </div>
       <div class="snap-grid">
 <div class="snap-cell"><p class="label">FX — last real</p><p class="value">1,512.73</p><p class="sub">01-Sep-2026</p></div><div class="snap-cell"><p class="label">CER — last real</p><p class="value">832.3269</p><p class="sub">01-Sep-2026</p></div><div class="snap-cell"><p class="label">TAMAR — last real</p><p class="value">24.688</p><p class="sub">31-Aug-2026</p></div>
