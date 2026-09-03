@@ -292,6 +292,37 @@
   }
   .nav-tab:hover { border-color: var(--accent); color: var(--accent); }
   .nav-tab.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  /* Break-even tab. Its tables carry more columns than the dashboard's fixed
+     9-column grid, so they opt out of table-layout:fixed and size naturally. */
+  .be-table { table-layout: auto; min-width: 980px; }
+  .be-table th, .be-table td { width: auto; }
+  .be-table td.tk { font-weight: 700; }
+  .be-tf {
+    font-size: 11px; font-weight: 600; color: var(--ink-soft);
+    border: 1px solid var(--line); border-radius: 4px; padding: 1px 5px;
+  }
+  .be-tf.be-interp { border-style: dashed; color: var(--muted); }
+  .be-cov { font-size: 11.5px; color: var(--ink-soft); }
+  tr.be-dim td { opacity: 0.5; }
+  .be-pos { color: var(--positive); }
+  .be-neg { color: var(--negative); }
+  .be-chart { margin-top: 10px; }
+  .be-chart svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .be-grid { stroke: var(--line); stroke-width: 1; }
+  .be-ax { font-size: 9px; fill: var(--muted); text-anchor: middle; }
+  .be-ay { font-size: 9px; fill: var(--muted); text-anchor: end; }
+  .be-bar { fill: var(--cer); opacity: 0.14; }
+  .be-bar-real { opacity: 0.38; }
+  .be-line { fill: none; stroke: var(--cer); stroke-width: 2; }
+  .be-dot { fill: var(--paper); stroke: var(--cer); stroke-width: 2; }
+  .be-dot-l { font-size: 9px; fill: var(--ink-soft); text-anchor: middle; font-weight: 600; }
+  .be-fwd { stroke: var(--duocer); stroke-width: 2.5; stroke-linecap: round; }
+  .be-fwd-l { font-size: 9.5px; fill: var(--duocer); text-anchor: middle; font-weight: 700; }
+  .be-ref { stroke: var(--real); stroke-width: 1.5; stroke-dasharray: 4 3; }
+  .be-ref-l { font-size: 9.5px; fill: var(--real); text-anchor: middle; font-weight: 600; }
+  .be-row-l { font-size: 11px; fill: var(--ink-soft); text-anchor: end; font-weight: 600; }
+  .be-val-l { font-size: 11px; fill: var(--ink); font-weight: 700; }
+  .be-lolli { stroke-width: 2; opacity: 0.45; }
   .scen-intro { margin-bottom: 10px; }
   .scen-intro p { color: var(--ink-soft); font-size: 11.5px; line-height: 1.5; max-width: 900px; margin: 0; }
   .scen-warn {
@@ -392,6 +423,7 @@
     <button class="nav-tab active" id="nav-dashboard" onclick="location.hash=''">Dashboard</button>
     <button class="nav-tab" id="nav-scenarios" onclick="location.hash='scenarios'">Scenario Analysis</button>
     <button class="nav-tab" id="nav-projections" onclick="location.hash='projections'">Projections</button>
+    <button class="nav-tab" id="nav-breakeven" onclick="location.hash='breakeven'">Break-even</button>
   </div>
 
   <div id="view-dashboard">
@@ -3735,6 +3767,89 @@
     </section>
   </div>
 
+  <div id="view-breakeven" class="hidden">
+    <header class="report-head">
+      <div class="head-line"><h1>Break-even</h1><span class="eyebrow">Argentina Bond Analytics Platform</span></div>
+      <div class="snap-grid">
+<div class="snap-cell"><p class="label">Fixed-rate curve</p><p class="value">10</p><p class="sub">15-Sep-2026 &rarr; 30-Jun-2027</p></div><div class="snap-cell"><p class="label">CER anchor</p><p class="value">840.1756</p><p class="sub">15-Sep-2026 &middot; last CPI Jul-26</p></div><div class="snap-cell"><p class="label">Break-evens</p><p class="value">14</p><p class="sub">8 CER &middot; 2 TAMAR &middot; 4 FX</p></div>
+      </div>
+    </header>
+    <section class="cat" data-cat="be-cer">
+      <div class="cat-head">
+        <span class="chip chip-ars_cer"></span>
+        <h2>Break-even Inflation</h2>
+        <span class="cat-count">8</span>
+        <span class="cat-conv">% m/m</span>
+      </div>
+      <div class="table-wrap">
+        <table class="be-table">
+          <thead><tr>
+            <th>CER Bond</th><th>Fixed-rate Pair</th>
+            <th class="num" title="Average monthly CPI print implied from the CER anchor to this bond's CER reference date">BE m/m</th>
+            <th title="CPI print months the implied average covers">Period</th>
+            <th class="num" title="CER value at the reference date that equates this bond to its fixed-rate pair">Target CER</th>
+            <th class="num" title="Date the target CER refers to — 10 business days before maturity">CER Date</th>
+            <th class="num">BE Annual</th>
+            <th class="num" title="CER-grid months from the anchor to the reference date">Months</th>
+            <th class="num">Maturity</th><th class="num">Price</th>
+            <th class="num" title="Benchmark nominal yield, LECAP simple act/365">TNA TF</th>
+            <th class="num" title="Bond's own real yield">TNA CER</th>
+          </tr></thead>
+          <tbody><tr class="be-dim"><td class="tk">X30S6</td><td><span class="be-tf">S30S6</span></td><td class="num em">-0.631%</td><td class="be-cov">Aug-26</td><td class="num">840.00</td><td class="num">16-Sep-2026</td><td class="num">-7.32%</td><td class="num">0.03</td><td class="num">30-Sep-2026</td><td class="num">115.50</td><td class="num">23.24%</td><td class="num">-0.24%</td></tr><tr><td class="tk">TZXO6</td><td><span class="be-tf">S30O6</span></td><td class="num em">1.443%</td><td class="be-cov">Aug-26 &ndash; Sep-26</td><td class="num">852.70</td><td class="num">16-Oct-2026</td><td class="num">18.76%</td><td class="num">1.03</td><td class="num">30-Oct-2026</td><td class="num">171.25</td><td class="num">23.71%</td><td class="num">2.66%</td></tr><tr><td class="tk">X30N6</td><td><span class="be-tf">S30N6</span></td><td class="num em">1.671%</td><td class="be-cov">Aug-26 &ndash; Sep-26</td><td class="num">867.56</td><td class="num">13-Nov-2026</td><td class="num">22.00%</td><td class="num">1.94</td><td class="num">30-Nov-2026</td><td class="num">123.91</td><td class="num">25.46%</td><td class="num">4.21%</td></tr><tr><td class="tk">TZXD6</td><td><span class="be-tf be-interp" title="Interpolated between S30N6 and T15E7">S30N6&ndash;T15E7</span></td><td class="num em">1.619%</td><td class="be-cov">Aug-26 &ndash; Oct-26</td><td class="num">873.20</td><td class="num">27-Nov-2026</td><td class="num">21.26%</td><td class="num">2.40</td><td class="num">15-Dec-2026</td><td class="num">300.50</td><td class="num">25.55%</td><td class="num">4.88%</td></tr><tr><td class="tk">TZXM7</td><td><span class="be-tf be-interp" title="Interpolated between T15E7 and T30A7">T15E7&ndash;T30A7</span></td><td class="num em">1.611%</td><td class="be-cov">Aug-26 &ndash; Jan-27</td><td class="num">924.72</td><td class="num">15-Mar-2027</td><td class="num">21.14%</td><td class="num">6.00</td><td class="num">31-Mar-2027</td><td class="num">221.60</td><td class="num">27.06%</td><td class="num">5.44%</td></tr><tr><td class="tk">TZXA7</td><td><span class="be-tf">T30A7</span></td><td class="num em">1.589%</td><td class="be-cov">Aug-26 &ndash; Mar-27</td><td class="num">938.72</td><td class="num">16-Apr-2027</td><td class="num">20.83%</td><td class="num">7.03</td><td class="num">30-Apr-2027</td><td class="num">121.95</td><td class="num">27.62%</td><td class="num">5.87%</td></tr><tr><td class="tk">TZXY7</td><td><span class="be-tf">T31Y7</span></td><td class="num em">1.713%</td><td class="be-cov">Aug-26 &ndash; Mar-27</td><td class="num">961.91</td><td class="num">14-May-2027</td><td class="num">22.61%</td><td class="num">7.97</td><td class="num">31-May-2027</td><td class="num">120.50</td><td class="num">28.41%</td><td class="num">5.20%</td></tr><tr><td class="tk">TZX27</td><td><span class="be-tf">T30J7</span></td><td class="num em">1.637%</td><td class="be-cov">Aug-26 &ndash; Apr-27</td><td class="num">972.38</td><td class="num">15-Jun-2027</td><td class="num">21.51%</td><td class="num">9.00</td><td class="num">30-Jun-2027</td><td class="num">393.55</td><td class="num">28.36%</td><td class="num">5.66%</td></tr></tbody>
+        </table>
+      </div>
+<div class="be-chart"><svg viewBox="0 0 1000 300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Implied monthly inflation by bond versus the REM path"><line x1="46" y1="254.0" x2="986" y2="254.0" class="be-grid"/><text x="39" y="257.5" class="be-ay">0.6%</text><line x1="46" y1="195.5" x2="986" y2="195.5" class="be-grid"/><text x="39" y="199.0" class="be-ay">1.2%</text><line x1="46" y1="137.0" x2="986" y2="137.0" class="be-grid"/><text x="39" y="140.5" class="be-ay">1.9%</text><line x1="46" y1="78.5" x2="986" y2="78.5" class="be-grid"/><text x="39" y="82.0" class="be-ay">2.5%</text><line x1="46" y1="20.0" x2="986" y2="20.0" class="be-grid"/><text x="39" y="23.5" class="be-ay">3.1%</text><rect x="63.1" y="141.8" width="51.3" height="112.2" class="be-bar"><title>Aug-26 1.80%</title></rect><text x="88.7" y="268.0" class="be-ax">Aug-26</text><rect x="148.5" y="141.8" width="51.3" height="112.2" class="be-bar"><title>Sep-26 1.80%</title></rect><text x="174.2" y="268.0" class="be-ax">Sep-26</text><rect x="234.0" y="155.5" width="51.3" height="98.5" class="be-bar"><title>Oct-26 1.66%</title></rect><text x="259.6" y="268.0" class="be-ax">Oct-26</text><rect x="319.5" y="157.5" width="51.3" height="96.5" class="be-bar"><title>Nov-26 1.63%</title></rect><text x="345.1" y="268.0" class="be-ax">Nov-26</text><rect x="404.9" y="141.8" width="51.3" height="112.2" class="be-bar"><title>Dec-26 1.80%</title></rect><text x="430.5" y="268.0" class="be-ax">Dec-26</text><rect x="490.4" y="151.2" width="51.3" height="102.8" class="be-bar"><title>Jan-27 1.70%</title></rect><text x="516.0" y="268.0" class="be-ax">Jan-27</text><rect x="575.8" y="151.2" width="51.3" height="102.8" class="be-bar"><title>Feb-27 1.70%</title></rect><text x="601.5" y="268.0" class="be-ax">Feb-27</text><rect x="661.3" y="154.7" width="51.3" height="99.3" class="be-bar"><title>Mar-27 1.66%</title></rect><text x="686.9" y="268.0" class="be-ax">Mar-27</text><rect x="746.7" y="158.2" width="51.3" height="95.8" class="be-bar"><title>Apr-27 1.63%</title></rect><text x="772.4" y="268.0" class="be-ax">Apr-27</text><rect x="832.2" y="161.6" width="51.3" height="92.4" class="be-bar"><title>May-27 1.59%</title></rect><text x="857.8" y="268.0" class="be-ax">May-27</text><rect x="917.6" y="165.1" width="51.3" height="88.9" class="be-bar"><title>Jun-27 1.55%</title></rect><text x="943.3" y="268.0" class="be-ax">Jun-27</text><line x1="134.2" y1="129.5" x2="211.4" y2="129.5" class="be-fwd"/><text x="172.8" y="124.5" class="be-fwd-l">1.93%<title>TZXO6 &#8594; X30N6</title></text><line x1="251.1" y1="160.1" x2="558.7" y2="160.1" class="be-fwd"/><text x="404.9" y="155.1" class="be-fwd-l">1.61%<title>TZXD6 &#8594; TZXM7</title></text><line x1="558.7" y1="173.3" x2="647.0" y2="173.3" class="be-fwd"/><text x="602.9" y="168.3" class="be-fwd-l">1.46%<title>TZXM7 &#8594; TZXA7</title></text><line x1="647.0" y1="62.0" x2="726.8" y2="62.0" class="be-fwd"/><text x="686.9" y="57.0" class="be-fwd-l">2.65%<title>TZXA7 &#8594; TZXY7</title></text><line x1="726.8" y1="212.0" x2="815.1" y2="212.0" class="be-fwd"/><text x="770.9" y="207.0" class="be-fwd-l">1.05%<title>TZXY7 &#8594; TZX27</title></text><polyline points="134.2,175.4 211.4,154.0 251.1,158.8 558.7,159.6 647.0,161.6 726.8,150.0 815.1,157.1" class="be-line"/><circle cx="134.2" cy="175.4" r="4" class="be-dot"><title>TZXO6 1.443% m/m</title></circle><text x="134.2" y="165.4" class="be-dot-l">TZXO6</text><circle cx="211.4" cy="154.0" r="4" class="be-dot"><title>X30N6 1.671% m/m</title></circle><text x="211.4" y="144.0" class="be-dot-l">X30N6</text><circle cx="251.1" cy="158.8" r="4" class="be-dot"><title>TZXD6 1.619% m/m</title></circle><text x="251.1" y="148.8" class="be-dot-l">TZXD6</text><circle cx="558.7" cy="159.6" r="4" class="be-dot"><title>TZXM7 1.611% m/m</title></circle><text x="558.7" y="149.6" class="be-dot-l">TZXM7</text><circle cx="647.0" cy="161.6" r="4" class="be-dot"><title>TZXA7 1.589% m/m</title></circle><text x="647.0" y="151.6" class="be-dot-l">TZXA7</text><circle cx="726.8" cy="150.0" r="4" class="be-dot"><title>TZXY7 1.713% m/m</title></circle><text x="726.8" y="140.0" class="be-dot-l">TZXY7</text><circle cx="815.1" cy="157.1" r="4" class="be-dot"><title>TZX27 1.637% m/m</title></circle><text x="815.1" y="147.1" class="be-dot-l">TZX27</text></svg></div>
+    </section>
+    <section class="cat" data-cat="be-tamar">
+      <div class="cat-head">
+        <span class="chip chip-ars_tamar"></span>
+        <h2>Break-even TAMAR</h2>
+        <span class="cat-count">2</span>
+        <span class="cat-conv">% avg</span>
+      </div>
+      <div class="table-wrap">
+        <table class="be-table">
+          <thead><tr>
+            <th>TAMAR Bond</th><th>Fixed-rate Pair</th>
+            <th class="num" title="Average daily TAMAR implied over the still-unknown part of the observation window">BE Avg</th>
+            <th title="Business days the implied average applies to">Period</th>
+            <th class="num" title="Implied average less the last published 5-day average">vs 5D</th>
+            <th class="num" title="Unknown / total business days in the observation window">Days</th>
+            <th class="num">TAMAR 5D</th>
+            <th class="num">Maturity</th><th class="num">Price</th>
+            <th class="num">TNA TF</th><th class="num">TEA</th>
+          </tr></thead>
+          <tbody><tr><td class="tk">TTD26</td><td><span class="be-tf be-interp" title="Interpolated between S30N6 and T15E7">S30N6&ndash;T15E7</span></td><td class="num em">24.77%</td><td class="be-cov">02-Sep-2026 &rarr; 27-Nov-2026</td><td class="num be-pos">+0.08 pp</td><td class="num">60 / 452</td><td class="num">24.69%</td><td class="num">15-Dec-2026</td><td class="num">168.85</td><td class="num">25.55%</td><td class="num">27.88%</td></tr><tr><td class="tk">TMF27</td><td><span class="be-tf be-interp" title="Interpolated between T15E7 and T30A7">T15E7&ndash;T30A7</span></td><td class="num em">23.05%</td><td class="be-cov">02-Sep-2026 &rarr; 12-Feb-2027</td><td class="num be-neg">-1.64 pp</td><td class="num">107 / 248</td><td class="num">24.69%</td><td class="num">26-Feb-2027</td><td class="num">121.50</td><td class="num">26.47%</td><td class="num">30.19%</td></tr></tbody>
+        </table>
+      </div>
+<div class="be-chart"><svg viewBox="0 0 1000 102" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Break-even by bond"><line x1="78.0" y1="16" x2="78.0" y2="72" class="be-grid"/><text x="78.0" y="87" class="be-ax">22.62%</text><line x1="290.0" y1="16" x2="290.0" y2="72" class="be-grid"/><text x="290.0" y="87" class="be-ax">23.26%</text><line x1="502.0" y1="16" x2="502.0" y2="72" class="be-grid"/><text x="502.0" y="87" class="be-ax">23.91%</text><line x1="714.0" y1="16" x2="714.0" y2="72" class="be-grid"/><text x="714.0" y="87" class="be-ax">24.55%</text><line x1="926.0" y1="16" x2="926.0" y2="72" class="be-grid"/><text x="926.0" y="87" class="be-ax">25.20%</text><line x1="758.6" y1="12" x2="758.6" y2="72" class="be-ref"/><text x="758.6" y="8" class="be-ref-l">TAMAR 5D</text><text x="70" y="36.5" class="be-row-l">TTD26</text><line x1="758.6" y1="33.0" x2="784.7" y2="33.0" class="be-lolli" style="stroke:var(--tamar)"/><circle cx="784.7" cy="33.0" r="4.5" class="be-dot" style="stroke:var(--tamar)"/><text x="793.7" y="36.5" class="be-val-l">24.77%</text><text x="70" y="62.5" class="be-row-l">TMF27</text><line x1="758.6" y1="59.0" x2="219.3" y2="59.0" class="be-lolli" style="stroke:var(--tamar)"/><circle cx="219.3" cy="59.0" r="4.5" class="be-dot" style="stroke:var(--tamar)"/><text x="228.3" y="62.5" class="be-val-l">23.05%</text></svg></div>
+    </section>
+    <section class="cat" data-cat="be-fx">
+      <div class="cat-head">
+        <span class="chip chip-ars_usd_linked"></span>
+        <h2>Break-even FX</h2>
+        <span class="cat-count">4</span>
+        <span class="cat-conv">ARS/USD</span>
+      </div>
+      <div class="table-wrap">
+        <table class="be-table">
+          <thead><tr>
+            <th>Dollar-linked Bond</th><th>Fixed-rate Pair</th>
+            <th class="num" title="Terminal FX fixing that equates this bond's ARS return to its fixed-rate pair">BE FX</th>
+            <th class="num">Spot</th>
+            <th class="num">Impl. Deval.</th><th class="num">Annualized</th>
+            <th class="num" title="FX Com. A3500 fixes 3 business days before payment">Fixing</th>
+            <th class="num">Maturity</th><th class="num">Price</th>
+            <th class="num">TNA TF</th>
+            <th class="num" title="Bond's own yield in USD terms">TEA USD</th>
+          </tr></thead>
+          <tbody><tr><td class="tk">D30S6</td><td><span class="be-tf">S30S6</span></td><td class="num em">1,529.03</td><td class="num">1,511.63</td><td class="num">1.15%</td><td class="num">16.09%</td><td class="num">25-Sep-2026</td><td class="num">30-Sep-2026</td><td class="num">150320.00</td><td class="num">23.24%</td><td class="num">8.81%</td></tr><tr><td class="tk">D15E7</td><td><span class="be-tf">T15E7</span></td><td class="num em">1,627.67</td><td class="num">1,511.63</td><td class="num">7.68%</td><td class="num">22.14%</td><td class="num">12-Jan-2027</td><td class="num">15-Jan-2027</td><td class="num">148720.00</td><td class="num">25.74%</td><td class="num">4.72%</td></tr><tr><td class="tk">D31M7</td><td><span class="be-tf be-interp" title="Interpolated between T15E7 and T30A7">T15E7&ndash;T30A7</span></td><td class="num em">1,703.27</td><td class="num">1,511.63</td><td class="num">12.68%</td><td class="num">23.06%</td><td class="num">25-Mar-2027</td><td class="num">31-Mar-2027</td><td class="num">147480.00</td><td class="num">27.06%</td><td class="num">4.52%</td></tr><tr><td class="tk">TZV27</td><td><span class="be-tf">T30J7</span></td><td class="num em">1,819.92</td><td class="num">1,511.63</td><td class="num">20.39%</td><td class="num">25.24%</td><td class="num">25-Jun-2027</td><td class="num">30-Jun-2027</td><td class="num">147600.00</td><td class="num">28.36%</td><td class="num">3.03%</td></tr></tbody>
+        </table>
+      </div>
+<div class="be-chart"><svg viewBox="0 0 1000 154" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Break-even by bond"><line x1="78.0" y1="16" x2="78.0" y2="124" class="be-grid"/><text x="78.0" y="139" class="be-ax">1,435</text><line x1="290.0" y1="16" x2="290.0" y2="124" class="be-grid"/><text x="290.0" y="139" class="be-ax">1,550</text><line x1="502.0" y1="16" x2="502.0" y2="124" class="be-grid"/><text x="502.0" y="139" class="be-ax">1,666</text><line x1="714.0" y1="16" x2="714.0" y2="124" class="be-grid"/><text x="714.0" y="139" class="be-ax">1,781</text><line x1="926.0" y1="16" x2="926.0" y2="124" class="be-grid"/><text x="926.0" y="139" class="be-ax">1,897</text><line x1="219.3" y1="12" x2="219.3" y2="124" class="be-ref"/><text x="219.3" y="8" class="be-ref-l">Spot</text><text x="70" y="36.5" class="be-row-l">D30S6</text><line x1="219.3" y1="33.0" x2="251.2" y2="33.0" class="be-lolli" style="stroke:var(--usdlinked)"/><circle cx="251.2" cy="33.0" r="4.5" class="be-dot" style="stroke:var(--usdlinked)"/><text x="260.2" y="36.5" class="be-val-l">1,529</text><text x="70" y="62.5" class="be-row-l">D15E7</text><line x1="219.3" y1="59.0" x2="432.1" y2="59.0" class="be-lolli" style="stroke:var(--usdlinked)"/><circle cx="432.1" cy="59.0" r="4.5" class="be-dot" style="stroke:var(--usdlinked)"/><text x="441.1" y="62.5" class="be-val-l">1,628</text><text x="70" y="88.5" class="be-row-l">D31M7</text><line x1="219.3" y1="85.0" x2="570.8" y2="85.0" class="be-lolli" style="stroke:var(--usdlinked)"/><circle cx="570.8" cy="85.0" r="4.5" class="be-dot" style="stroke:var(--usdlinked)"/><text x="579.8" y="88.5" class="be-val-l">1,703</text><text x="70" y="114.5" class="be-row-l">TZV27</text><line x1="219.3" y1="111.0" x2="784.7" y2="111.0" class="be-lolli" style="stroke:var(--usdlinked)"/><circle cx="784.7" cy="111.0" r="4.5" class="be-dot" style="stroke:var(--usdlinked)"/><text x="793.7" y="114.5" class="be-val-l">1,820</text></svg></div>
+    </section>
+  </div>
+
   <div id="yc-tooltip" class="yc-tooltip" role="status" aria-live="polite"></div>
 
 </div>
@@ -4474,16 +4589,20 @@ function route() {
   const det = document.getElementById("view-detail");
   const scen = document.getElementById("view-scenarios");
   const proj = document.getElementById("view-projections");
+  const bev_ = document.getElementById("view-breakeven");
   const navDash = document.getElementById("nav-dashboard");
   const navScen = document.getElementById("nav-scenarios");
   const navProj = document.getElementById("nav-projections");
+  const navBev = document.getElementById("nav-breakeven");
   dash.classList.add("hidden");
   det.classList.add("hidden");
   scen.classList.add("hidden");
   proj.classList.add("hidden");
+  bev_.classList.add("hidden");
   navDash.classList.remove("active");
   navScen.classList.remove("active");
   navProj.classList.remove("active");
+  navBev.classList.remove("active");
   if (m) {
     renderDetail(decodeURIComponent(m[1]));
     det.classList.remove("hidden");
@@ -4496,6 +4615,10 @@ function route() {
   } else if (hash === "projections") {
     proj.classList.remove("hidden");
     navProj.classList.add("active");
+    window.scrollTo(0,0);
+  } else if (hash === "breakeven") {
+    bev_.classList.remove("hidden");
+    navBev.classList.add("active");
     window.scrollTo(0,0);
   } else {
     dash.classList.remove("hidden");
